@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "nbtbackup",
+  "version": "${version}",
+  "name": "nbtbackup",
+  "description": "Backs up world by using improved backup methods.",
+  "authors": [
+    "expeehaa"
+  ],
+  "contributors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/nbtbackup/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "de.expeehaa.nbtbackup.NbtBackup"
+    ],
+    "client": [],
+    "server": []
+  },
+  "mixins": [
+    "nbtbackup.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.1",
+    "fabric": "*"
+  }
+}
