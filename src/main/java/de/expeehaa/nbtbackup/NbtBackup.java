@@ -1,26 +1,36 @@
 package de.expeehaa.nbtbackup;
 
 import net.fabricmc.api.ModInitializer;
-
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import static net.minecraft.server.command.CommandManager.literal;
 
 public class NbtBackup implements ModInitializer {
-
-    public static Logger LOGGER = LogManager.getLogger();
-
     public static final String MOD_ID = "nbtbackup";
     public static final String MOD_NAME = "nbtbackup";
 
+    private Config config;
+
+    private final NbtBackupCommand nbtBackupCommand = new NbtBackupCommand(this);
+
     @Override
     public void onInitialize() {
-        log(Level.INFO, "Initializing");
-        //TODO: Initializer
+        config = new Config();
+
+        System.out.println("Config loaded.");
+
+        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+            dispatcher.register(literal("backup").executes(nbtBackupCommand::run));
+            dispatcher.register(literal("rconf").executes(cscs -> {
+                config = new Config();
+                System.out.println("Config reloaded.");
+                return 0;
+            }));
+        });
+
+        System.out.println("Commands registered.");
     }
 
-    public static void log(Level level, String message){
-        LOGGER.log(level, "["+MOD_NAME+"] " + message);
+    public Config getConfig(){
+        return config;
     }
-
 }
