@@ -2,7 +2,9 @@
   "required": true,
   "package": "de.expeehaa.nbtbackup.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [],
+  "mixins": [
+    "MixedMinecraftServer"
+  ],
   "client": [],
   "server": [],
   "injectors": {
